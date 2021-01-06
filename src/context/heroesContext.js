@@ -23,6 +23,4 @@ const HeroesProvider = ({ children }) => {
   );
 };
 
-export const dupa = "dupa";
-
 export default HeroesProvider;
