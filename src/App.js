@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Heores from "./components/Heores";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import HeroesProvider from "./context/heroesContext";
+import Dashboard from "./components/Dashboard";
+import HeroDetails from "./components/HeroDetails";
 
 function App() {
+  const title = "Tour of Heroes";
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HeroesProvider>
+      <Router>
+        <div>
+          <h1>{title}</h1>
+          <nav>
+            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/heroes">Heroes</Link>
+          </nav>
+        </div>
+        <Switch>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
+          <Route path="/heroes">
+            <Heores />
+          </Route>
+          <Route path="/detail/:id">
+            <HeroDetails />
+          </Route>
+          <Route exact path="/detail">
+            <h3>Please select a hero.</h3>
+          </Route>
+        </Switch>
+      </Router>
+    </HeroesProvider>
   );
 }
 
